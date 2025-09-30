@@ -25,7 +25,8 @@ marketplace_dashboard/
 ## 🚀 Getting started
 
 1. **Install Node.js** (version 18 or newer).  You can download it from [nodejs.org](https://nodejs.org/).
-2. Open a terminal in the `backend` directory and run:
+2. Copy `backend/.env.example` to `backend/.env` and fill in your marketplace credentials.  Leaving a field empty keeps the demo data enabled.
+3. Open a terminal in the `backend` directory and run:
 
    ```bash
    npm install
@@ -33,13 +34,19 @@ marketplace_dashboard/
    ```
 
    The server starts on port `3001` by default.  You can change this by setting the `PORT` environment variable.
-3. In a second terminal, serve the `frontend` directory.  You can use a simple HTTP server like [`http-server`](https://www.npmjs.com/package/http-server) or any other static server.  For example:
+4. In a second terminal, serve the `frontend` directory.  You can use a simple HTTP server like [`http-server`](https://www.npmjs.com/package/http-server) or any other static server.  For example:
 
    ```bash
    npx http-server ./frontend -p 3000
    ```
 
-4. Navigate to [http://localhost:3000](http://localhost:3000) in your browser.  The dashboard will request order data from `http://localhost:3001/api/orders`.
+5. Navigate to [http://localhost:3000](http://localhost:3000) in your browser.  The dashboard will request order data from `http://localhost:3001/api/orders`.
+
+### Deploying the frontend (e.g. GitHub Pages)
+
+- The file `frontend/config.js` controls which backend the dashboard talks to.  Set `API_BASE_URL` to the public URL of your backend (for example one hosted on Render or Railway).  When the value is empty the page falls back to the bundled demo data (`frontend/sample-orders.json`).
+- Commit and push the updated `config.js` together with the frontend files to the branch that GitHub Pages serves (usually `main`).  The live site (e.g. `https://otar989.github.io/Marketplace_dashboard/`) will then load your configured backend.
+- Remember that GitHub Pages only hosts static files.  You still need to deploy the Node.js backend somewhere reachable from the internet if you want real orders to appear.
 
 ## 🔧 Configuring marketplace APIs
 

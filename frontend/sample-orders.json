@@ -1,0 +1,22 @@
+{
+  "orders": [
+    {
+      "id": "OZ-100500",
+      "createdAt": "2024-09-01T10:15:00.000Z",
+      "status": "awaiting_confirmation",
+      "marketplace": "Ozon"
+    },
+    {
+      "id": "WB-200600",
+      "createdAt": "2024-09-02T09:45:00.000Z",
+      "status": "processing",
+      "marketplace": "Wildberries"
+    },
+    {
+      "id": "YM-300700",
+      "createdAt": "2024-09-03T13:05:00.000Z",
+      "status": "delivered",
+      "marketplace": "Yandex Market"
+    }
+  ]
+}
