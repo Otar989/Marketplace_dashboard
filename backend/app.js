@@ -12,20 +12,40 @@ const port = process.env.PORT || 3001;
 // Allow cross-origin requests so static frontends (e.g. GitHub Pages) can call the API.
 app.use(cors());
 
+const SAMPLE_ORDERS = {
+  ozon: [
+    {
+      id: 'OZ-100500',
+      createdAt: new Date().toISOString(),
+      status: 'awaiting_confirmation',
+      marketplace: 'Ozon',
+    },
+  ],
+  wildberries: [
+    {
+      id: 'WB-200600',
+      createdAt: new Date().toISOString(),
+      status: 'processing',
+      marketplace: 'Wildberries',
+    },
+  ],
+  yandex: [
+    {
+      id: 'YM-300700',
+      createdAt: new Date().toISOString(),
+      status: 'processing',
+      marketplace: 'Yandex Market',
+    },
+  ],
+};
+
 // Helper: fetch unfulfilled orders from Ozon Seller API
 async function fetchOzonOrders() {
   const clientId = process.env.OZON_CLIENT_ID;
   const apiKey = process.env.OZON_API_KEY;
   // If no credentials provided, return sample data
   if (!clientId || !apiKey) {
-    return [
-      {
-        id: '123456',
-        createdAt: new Date().toISOString(),
-        status: 'awaiting_confirmation',
-        marketplace: 'Ozon',
-      },
-    ];
+    return SAMPLE_ORDERS.ozon;
   }
   try {
     const response = await axios.post(
@@ -52,7 +72,7 @@ async function fetchOzonOrders() {
     }));
   } catch (error) {
     console.error('Error fetching Ozon orders:', error.response?.data || error.message);
-    return [];
+    return SAMPLE_ORDERS.ozon;
   }
 }
 
@@ -60,14 +80,7 @@ async function fetchOzonOrders() {
 async function fetchWildberriesOrders() {
   const token = process.env.WB_API_TOKEN;
   if (!token) {
-    return [
-      {
-        id: 'WB-987654',
-        createdAt: new Date().toISOString(),
-        status: 'new',
-        marketplace: 'Wildberries',
-      },
-    ];
+    return SAMPLE_ORDERS.wildberries;
   }
   try {
     const response = await axios.get('https://suppliers-api.wildberries.ru/api/v3/orders', {
@@ -89,7 +102,7 @@ async function fetchWildberriesOrders() {
     }));
   } catch (error) {
     console.error('Error fetching Wildberries orders:', error.response?.data || error.message);
-    return [];
+    return SAMPLE_ORDERS.wildberries;
   }
 }
 
@@ -98,14 +111,7 @@ async function fetchYandexOrders() {
   const partnerId = process.env.YANDEX_PARTNER_ID;
   const token = process.env.YANDEX_API_TOKEN;
   if (!partnerId || !token) {
-    return [
-      {
-        id: 'YM-543210',
-        createdAt: new Date().toISOString(),
-        status: 'processing',
-        marketplace: 'Yandex Market',
-      },
-    ];
+    return SAMPLE_ORDERS.yandex;
   }
   try {
     const response = await axios.get(
@@ -130,7 +136,7 @@ async function fetchYandexOrders() {
     }));
   } catch (error) {
     console.error('Error fetching Yandex Market orders:', error.response?.data || error.message);
-    return [];
+    return SAMPLE_ORDERS.yandex;
   }
 }
 
