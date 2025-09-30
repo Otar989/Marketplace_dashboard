@@ -45,6 +45,7 @@ marketplace_dashboard/
 ### Deploying the frontend (e.g. GitHub Pages)
 
 - The file `frontend/config.js` controls which backend the dashboard talks to.  Set `API_BASE_URL` to the public URL of your backend (for example one hosted on Render or Railway).  When the value is empty the page falls back to the bundled demo data (`frontend/sample-orders.json`).
+- The default `API_BASE_URL` points to the sample Vercel deployment (`https://marketplace-dashboard-tau.vercel.app`).  Replace it with your own backend URL if you deploy somewhere else.
 - Commit and push the updated `config.js` together with the frontend files to the branch that GitHub Pages serves (usually `main`).  The live site (e.g. `https://otar989.github.io/Marketplace_dashboard/`) will then load your configured backend.
 - Remember that GitHub Pages only hosts static files.  You still need to deploy the Node.js backend somewhere reachable from the internet if you want real orders to appear.
 

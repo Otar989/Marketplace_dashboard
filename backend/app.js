@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const dotenv = require('dotenv');
 
 // Load environment variables from .env file if present
@@ -7,6 +8,9 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+// Allow cross-origin requests so static frontends (e.g. GitHub Pages) can call the API.
+app.use(cors());
 
 // Helper: fetch unfulfilled orders from Ozon Seller API
 async function fetchOzonOrders() {
