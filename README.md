@@ -48,6 +48,14 @@ marketplace_dashboard/
 - Commit and push the updated `config.js` together with the frontend files to the branch that GitHub Pages serves (usually `main`).  The live site (e.g. `https://otar989.github.io/Marketplace_dashboard/`) will then load your configured backend.
 - Remember that GitHub Pages only hosts static files.  You still need to deploy the Node.js backend somewhere reachable from the internet if you want real orders to appear.
 
+### Deploying the backend to Vercel
+
+1. Make sure `backend/.env` contains your marketplace API keys.  Commit `.env.example`, but **never** commit `.env`.
+2. Install the Vercel CLI (`npm i -g vercel`) or connect the repository through the Vercel dashboard.
+3. During the first deployment point Vercel to the project root.  The provided `vercel.json` routes `/api/*` requests to `backend/app.js` using the Node serverless runtime.
+4. In the Vercel project settings add environment variables (`OZON_CLIENT_ID`, `OZON_API_KEY`, `WB_API_TOKEN`, optionally `YANDEX_PARTNER_ID`, `YANDEX_API_TOKEN`, `PORT`).  Redeploy after saving.
+5. After deployment note the public URL (e.g. `https://your-dashboard.vercel.app`) and set it as `API_BASE_URL` in `frontend/config.js` so the GitHub Pages frontend talks to the live backend.
+
 ## 🔧 Configuring marketplace APIs
 
 The backend is already prepared to call the official APIs for Ozon, Wildberries and Yandex Market.  To enable real data, create a `.env` file in the `backend` directory and set the appropriate environment variables:

@@ -148,6 +148,12 @@ app.get('/', (_req, res) => {
   res.send('Marketplace Dashboard backend is running');
 });
 
-app.listen(port, () => {
-  console.log(`Marketplace Dashboard backend listening on port ${port}`);
-});
+// When running locally we start the HTTP server. In serverless environments
+// (e.g. Vercel) the app is exported and Vercel handles the request lifecycle.
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Marketplace Dashboard backend listening on port ${port}`);
+  });
+}
+
+module.exports = app;
